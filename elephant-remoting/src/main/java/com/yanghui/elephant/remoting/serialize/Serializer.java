@@ -116,7 +116,7 @@ public abstract class Serializer {
 	}
 
 	public <T> List<T> readList(Class<T> clz) {
-		List<T> list = new ArrayList<>();
+		List<T> list = new ArrayList<T>();
 		int size = readBuffer.readShort();
 		for (int i = 0; i < size; i++) {
 			list.add(read(clz));
@@ -125,7 +125,7 @@ public abstract class Serializer {
 	}
 
 	public <K, V> Map<K, V> readMap(Class<K> keyClz, Class<V> valueClz) {
-		Map<K, V> map = new HashMap<>();
+		Map<K, V> map = new HashMap<K,V>();
 		int size = readBuffer.readShort();
 		for (int i = 0; i < size; i++) {
 			K key = read(keyClz);
@@ -244,22 +244,22 @@ public abstract class Serializer {
 			writeByte((byte) 0);
 		} else {
 			if (object instanceof Integer) {
-				writeInt((int) object);
+				writeInt((Integer) object);
 				return this;
 			}
 
 			if (object instanceof Long) {
-				writeLong((long) object);
+				writeLong((Long) object);
 				return this;
 			}
 
 			if (object instanceof Short) {
-				writeShort((short) object);
+				writeShort((Short) object);
 				return this;
 			}
 
 			if (object instanceof Byte) {
-				writeByte((byte) object);
+				writeByte((Byte) object);
 				return this;
 			}
 

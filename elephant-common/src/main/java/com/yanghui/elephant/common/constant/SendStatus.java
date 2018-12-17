@@ -3,7 +3,7 @@ package com.yanghui.elephant.common.constant;
 public enum SendStatus {
 	
 	WAIT_SEND(1,"待发送"),
-	ALREADY_SEND(2,"已发送"),
+	ALREADY_SEND(2,"已发送"),  //confirmed and sent to MQ
 	;
 	
 	private int status;

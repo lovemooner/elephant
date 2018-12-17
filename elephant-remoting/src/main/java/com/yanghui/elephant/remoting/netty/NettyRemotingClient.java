@@ -59,7 +59,7 @@ public class NettyRemotingClient extends NettyRemotingAbstract implements Remoti
 	
 	private final Timer timer = new Timer("scanResponseTable", true);
 	
-	private final ConcurrentHashMap<String, ChannelWrapper> channelTables = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<String, ChannelWrapper> channelTables = new ConcurrentHashMap<String, ChannelWrapper>();
 
 	private DefaultEventExecutorGroup defaultEventExecutorGroup;
 	

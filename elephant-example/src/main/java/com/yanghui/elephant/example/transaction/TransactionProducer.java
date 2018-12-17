@@ -3,8 +3,10 @@ package com.yanghui.elephant.example.transaction;
 import com.yanghui.elephant.client.exception.MQClientException;
 import com.yanghui.elephant.client.producer.LocalTransactionExecuter;
 import com.yanghui.elephant.client.producer.TransactionMQProducer;
-import com.yanghui.elephant.client.producer.TransactionSendResult;
+import com.yanghui.elephant.client.pojo.TransactionSendResult;
 import com.yanghui.elephant.common.message.Message;
+
+
 
 public class TransactionProducer {
 	

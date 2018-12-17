@@ -9,8 +9,8 @@
 		<id column="group" property="group" />
 		<id column="destination" property="destination" />
 		<id column="body" property="body" />
-		<id column="status" property="status" />
-		<id column="send_status" property="sendStatus" />
+		<id column="status" property="status" />   <!-- producer发送的消息状态-->
+		<id column="send_status" property="sendStatus" />   <!-- 发送的MQ的状态 -->
 		<id column="transaction" property="transaction" />
 		<id column="properties" property="properties" />
 		<result column="remark" property="remark" />

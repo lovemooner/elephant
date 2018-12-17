@@ -35,7 +35,7 @@ public class RemotingCommand extends Serializer implements Serializable{
 	private static final int RESPONSE_CMD_TYPE = 1;
 
 	private static AtomicInteger requestId = new AtomicInteger(0);
-	private static Map<Class<? extends CommandCustomHeader>, Field[]> CLASS_FIELD_MAP = new HashMap<>();
+	private static Map<Class<? extends CommandCustomHeader>, Field[]> CLASS_FIELD_MAP = new HashMap<Class<? extends CommandCustomHeader>, Field[]>();
 	
 	private int code;
 	private int version = 0;
@@ -104,7 +104,9 @@ public class RemotingCommand extends Serializer implements Serializable{
 		CommandCustomHeader commandCustomHeader = null;
 		try {
 			commandCustomHeader = clazz.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
+		} catch (InstantiationException e) {
+			return null;
+		}catch (IllegalAccessException e){
 			return null;
 		}
 		if(this.extFields == null) {
@@ -153,7 +155,7 @@ public class RemotingCommand extends Serializer implements Serializable{
 			return;
 		}
 		if(null == this.extFields) {
-			this.extFields = new HashMap<>();
+			this.extFields = new HashMap<String, String>();
 		}
 		Field[] fields = getClazzFields(commandCustomHeader.getClass());
 		for(Field f : fields) {

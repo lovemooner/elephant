@@ -38,7 +38,7 @@ public class SessionAwareMessageListenerImpl implements SessionAwareMessageListe
 		this.jmsTemplate = jmsTemplate;
 	}
 	@Override
-	public void onMessage(Message message, Session session) throws JMSException {
+	public void onMessage(final Message message, Session session) throws JMSException {
 		try {
 			Class<?>[] clzs = method.getParameterTypes();
 			if(clzs != null && clzs.length == 1){

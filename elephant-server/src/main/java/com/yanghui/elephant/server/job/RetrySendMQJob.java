@@ -19,6 +19,10 @@ import com.yanghui.elephant.mq.producer.ProducerService;
 import com.yanghui.elephant.store.entity.MessageEntity;
 import com.yanghui.elephant.store.mapper.MessageEntityMapper;
 
+/**
+ * step 3.1/step 4.1  failed,re-push to MQ
+ *
+ */
 @Component
 @Log4j2
 public class RetrySendMQJob implements SimpleJob{
@@ -33,7 +37,7 @@ public class RetrySendMQJob implements SimpleJob{
 	@Override
 	public void execute(ShardingContext shardingContext) {
 		List<MessageEntity> findList = this.messageEntityMapper.querySendMQExcetion();
-		log.info("查询消息确认但是发送mq失败的（查询1分钟之前的）记录数：{}",findList);
+		log.info("server-->查询消息确认但是发送mq失败的（查询1分钟之前的）记录数：{}",findList);
 		if(findList.isEmpty()){
 			return;
 		}

@@ -20,10 +20,14 @@ import com.google.common.collect.Lists;
 import com.yanghui.elephant.common.constant.RequestCode;
 import com.yanghui.elephant.common.protocol.header.CheckTransactionStateRequestHeader;
 import com.yanghui.elephant.remoting.procotol.RemotingCommand;
-import com.yanghui.elephant.server.service.ProducerManager;
+import com.yanghui.elephant.server.processor.ProducerManager;
 import com.yanghui.elephant.store.entity.MessageEntity;
 import com.yanghui.elephant.store.mapper.MessageEntityMapper;
 
+
+/**
+ * 4 check: query producer for msg status
+ */
 @Component
 @Log4j2
 public class TransactionCheckJob implements SimpleJob{
@@ -42,9 +46,7 @@ public class TransactionCheckJob implements SimpleJob{
 		}
 		try {
 			for(MessageEntity entity : findList){
-				
 				CheckTransactionStateRequestHeader requestHeader = new CheckTransactionStateRequestHeader();
-				
 				requestHeader.setMessageId(entity.getMessageId());
 				requestHeader.setDestination(entity.getDestination());
 				requestHeader.setProducerGroup(entity.getGroup());

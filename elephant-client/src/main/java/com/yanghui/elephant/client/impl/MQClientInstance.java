@@ -172,7 +172,7 @@ public class MQClientInstance implements IServerChanngeListener{
 				message.setMessageId(requestHeader.getMessageId());
 				message.setProperties((Map<String, String>)JSON.parseObject(requestHeader.getProperties(), Map.class));
 				
-				inner.checkTransactionState(remoteAddress,requestHeader.getProducerGroup(),message);
+				inner.check(remoteAddress,requestHeader.getProducerGroup(),message);
 			} catch (Exception e) {
 				log.error("处理事务消息回查发生异常：{}",e);
 			}

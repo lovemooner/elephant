@@ -19,7 +19,7 @@ public class Message implements Serializable{
 	private String messageId;
 	private String destination;
 	private byte[] body;
-	private Map<String,String> properties = new HashMap<>();
+	private Map<String,String> properties = new HashMap<String,String>();
 	
 	public Message(){
 	}
@@ -32,5 +32,8 @@ public class Message implements Serializable{
 		this.destination = destination;
 		this.body = body;
 		this.messageId = UUID.randomUUID().toString();
+		//TODO ? whate
+		getProperties().put(MessageConstant.PROPERTY_TRANSACTION_PREPARED,
+				MessageType.TRANSACTION_PRE_MESSAGE.name());
 	}
 }

@@ -1,6 +1,7 @@
 package com.yanghui.elephant.client.producer;
 
 import com.yanghui.elephant.client.exception.MQClientException;
+import com.yanghui.elephant.client.pojo.TransactionSendResult;
 import com.yanghui.elephant.common.message.Message;
 
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class TransactionMQProducer extends DefaultMQProducer {
+public class TransactionMQProducer extends MessageProducer {
 	/**
 	 * 消息回查监听器
 	 */
@@ -37,22 +38,22 @@ public class TransactionMQProducer extends DefaultMQProducer {
 	@Override
 	public void start() throws MQClientException {
 		super.start();
-		this.defaultMQProducerImpl.initTransaction();
+		this.producerImpl.initTransaction();
 	}
 	@Override
 	public void shutdown() {
 		super.shutdown();
-		this.defaultMQProducerImpl.destroyTransaction();
+		this.producerImpl.destroyTransaction();
 	}
 	
 	@Override
-	public TransactionSendResult sendMessageTransaction(Message msg,LocalTransactionExecuter excuter, Object arg) throws MQClientException{
+	public TransactionSendResult sendMessageTransaction(Message msg, LocalTransactionExecuter excuter, Object arg) throws MQClientException{
 		if (null == this.transactionCheckListener) {
             throw new MQClientException("localTransactionBranchCheckListener is null", null);
         }
 		if(null == excuter){
 			throw new MQClientException("localTransactionExecuter is null", null);
 		}
-		return this.defaultMQProducerImpl.sendMessageInTransaction(msg,excuter,arg);
+		return this.producerImpl.sendMessageInTransaction(msg,excuter,arg);
 	}
 }
